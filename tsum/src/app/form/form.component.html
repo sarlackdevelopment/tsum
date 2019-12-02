@@ -1,105 +1,109 @@
+
+<!--<form class="container" [formGroup]="form" (ngSubmit)="submit()">
+    <fieldset [disabled]="disabled">
+        <fio-component></fio-component>
+
+        <div class="form-row">
+            <family-component class="col-md-6"></family-component>
+            <gender-component class="col-md-6"></gender-component>
+        </div>
+        <div class="form-row">
+            <birth-date-component class="col-md-6"></birth-date-component>
+            <quantity-children-component class="col-md-6"></quantity-children-component>
+        </div>
+        <email-component></email-component>
+        <comment-component></comment-component>
+
+        <button class="btn btn-primary" type="submit" [disabled]="form.invalid">Отправить</button>
+    </fieldset>
+</form>-->
+
 <form class="container" [formGroup]="form" (ngSubmit)="submit()">
-    <h1 class="text-center">Форма резюме</h1>
+    <fieldset [disabled]="disabled">
+        <h1 class="text-center">Форма резюме</h1>
 
-    <!--<fio-component></fio-component>
-
-    <div class="form-row">
-        <family-component class="col-md-6"></family-component>
-        <gender-component class="col-md-6"></gender-component>
-    </div>
-    <div class="form-row">
-        <birth-date-component class="col-md-6"></birth-date-component>
-        <quantity-children-component class="col-md-6"></quantity-children-component>
-    </div>
-    <email-component></email-component>
-    <comment-component></comment-component>
-    
-    <button class="btn btn-primary" type="submit" [disabled]="form.invalid">Отправить</button>-->
-
-
-    <div class="form-group">
-        <label for="fio">ФИО</label>
-        <input 
-            type="text" 
-            id="fio"
-            class="form-control"  
-            aria-describedby="fioHelp"
-            placeholder="Введите ФИО"
-            formControlName="FIO"
-        >
-    </div>
-    <div class="form-row">
-        <div *ngIf="toggleFamily" class="col-md-6 form-group">
-            <label for="birthDate">Семейное положение</label>
-            <select class="form-control">
-                <option [selected]="selectedGender">Выбор...</option>
-                <option *ngIf="male">Женат</option>
-                <option *ngIf="!male">Замужем</option>
-                <option>Нет</option>
-                <option>В разводе</option>
-            </select>
-        </div>
-        <div class="col-md-6 form-group">
-            <label for="gender">Пол</label>
-            <div class="form-group">
-                <div class="form-check form-check-inline">
-                    <input 
-                        (change)="male=true"
-                        id="male"
-                        class="form-check-input" 
-                        type="radio"
-                        name="exampleRadios"
-                        checked
-                    >
-                    <label class="form-check-label" for="male">
-                        муж.
-                    </label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input
-                        (change)="male=false"
-                        class="form-check-input"
-                        type="radio"
-                        name="exampleRadios"
-                    >
-                    <label class="form-check-label" for="female">
-                        жен.
-                    </label>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="form-row">
-        <div class="col-md-6 form-group" (change)="changeBirthDate($event)">
-            <label for="birthDate">Дата рождения</label>
+        <div class="form-group">
+            <label for="fio">ФИО</label>
             <input 
-                type="date"
-                class="form-control"
-                id="birthDate"
-                aria-describedby="birthDateHelp"
-                placeholder="Введите дату рождения"
-                formControlName="birthDate"
+                type="text" 
+                id="fio"
+                class="form-control"  
+                aria-describedby="fioHelp"
+                placeholder="Введите ФИО"
+                formControlName="FIO"
             >
         </div>
-        <div class="col-md-6 form-group">
-            <label for="countOfChildren">Количество детей</label>
-            <div class="d-flex">
-                <button type="button" class="btn btn-primary btn-sm mr-1">-</button>
-                <input type="text" class="form-control" id="countOfChildren" aria-describedby="countOfChildrenHelp" placeholder="количество">
-                <button type="button" class="btn btn-primary btn-sm ml-1">+</button>
+        <div class="form-row">
+            <div *ngIf="toggleFamily" class="col-md-6 form-group">
+                <label for="birthDate">Семейное положение</label>
+                <select class="form-control">
+                    <option selected>Выбор...</option>
+                    <option *ngIf="male">Женат</option>
+                    <option *ngIf="!male">Замужем</option>
+                    <option>Нет</option>
+                    <option>В разводе</option>
+                </select>
+            </div>
+            <div class="col-md-6 form-group">
+                <label for="gender">Пол</label>
+                <div class="form-group">
+                    <div class="form-check form-check-inline">
+                        <input 
+                            (change)="male=true"
+                            id="male"
+                            class="form-check-input" 
+                            type="radio"
+                            name="exampleRadios"
+                            checked
+                        >
+                        <label class="form-check-label" for="male">
+                            муж.
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input
+                            (change)="male=false"
+                            class="form-check-input"
+                            type="radio"
+                            name="exampleRadios"
+                        >
+                        <label class="form-check-label" for="female">
+                            жен.
+                        </label>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="form-group">
-        <label for="emailAddress">Email</label>
-        <input type="email" class="form-control" id="emailAddress" aria-describedby="emailHelp" placeholder="Введите email">
-        <!--<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
-    </div>
-    <div class="form-group">
-        <label for="comment">Введите комментарий</label>
-        <textarea class="form-control" id="comment" rows="3"></textarea>
-    </div>
+        <div class="form-row">
+            <div class="col-md-6 form-group" (change)="changeBirthDate($event)">
+                <label for="birthDate">Дата рождения</label>
+                <input 
+                    type="date"
+                    class="form-control"
+                    id="birthDate"
+                    aria-describedby="birthDateHelp"
+                    placeholder="Введите дату рождения"
+                    formControlName="birthDate"
+                >
+            </div>
+            <div class="col-md-6 form-group">
+                <label for="countOfChildren">Количество детей</label>
+                <div class="d-flex">
+                    <button type="button" class="btn btn-primary btn-sm mr-1" (click)="childs('decrease')">-</button>
+                    <input type="text" class="form-control" id="countOfChildren" aria-describedby="countOfChildrenHelp" placeholder="количество" [value]="countOfChilds">
+                    <button type="button" class="btn btn-primary btn-sm ml-1" (click)="childs('increase')">+</button>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="emailAddress">Email</label>
+            <input type="email" class="form-control" id="emailAddress" aria-describedby="emailHelp" placeholder="Введите email" formControlName="email">
+        </div>
+        <div class="form-group">
+            <label for="comment">Введите комментарий</label>
+            <textarea class="form-control" id="comment" rows="3"></textarea>
+        </div>
 
-    <button class="btn btn-primary" type="submit" [disabled]="form.invalid">Отправить</button>
-    
+        <button class="btn btn-primary btn-block" type="submit">Отправить</button>
+    </fieldset>
 </form>

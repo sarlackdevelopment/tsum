@@ -10,6 +10,10 @@ export class FormComponent implements OnInit {
   form: FormGroup
   toggleFamily = false
   male = true
+  countOfChilds = 0
+  areYouKidding = false
+  counterTry = 0
+  disabled=false
 
   ngOnInit() {
     this.form = new FormGroup({
@@ -18,7 +22,12 @@ export class FormComponent implements OnInit {
           Validators.required, 
           Validators.pattern('^(?! )(?!.* $)[а-яА-ЯёЁ -]+$')
         ]),
-      birthDate: new FormControl('', Validators.required)
+      birthDate: new FormControl('', Validators.required),
+      email: new FormControl('', 
+        [
+          Validators.required,
+          Validators.email
+        ])
     })
   }
 
@@ -32,7 +41,35 @@ export class FormComponent implements OnInit {
 
   }
 
+  childs(operation) {
+    switch (operation) {
+      case 'decrease':
+        if (this.countOfChilds != 0) {
+          this.countOfChilds--
+        }
+        break
+      case 'increase':
+        if (this.countOfChilds > 14) {
+          this.areYouKidding = true
+        }
+        this.countOfChilds++
+        break
+    }
+  }
+
   submit() {
-    //console.log(this.ghj)
+
+    if (this.form.invalid) {
+      this.disabled = true
+      setTimeout(() => this.disabled = false, 3000)
+      if (this.counterTry > 2) {
+        this.form.reset()
+        this.counterTry = 0
+      }
+      this.counterTry++
+    } else {
+
+    }
+    
   }
 }
