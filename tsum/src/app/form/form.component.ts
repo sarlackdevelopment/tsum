@@ -9,6 +9,7 @@ export class FormComponent implements OnInit {
 
   form: FormGroup
   toggleFamily = false
+  male = true
 
   ngOnInit() {
     this.form = new FormGroup({

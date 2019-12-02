@@ -32,23 +32,36 @@
         <div *ngIf="toggleFamily" class="col-md-6 form-group">
             <label for="birthDate">Семейное положение</label>
             <select class="form-control">
-                <option>Женат</option>
-                <option>Замужем</option>
-                <option>В разводе</option>
+                <option [selected]="selectedGender">Выбор...</option>
+                <option *ngIf="male">Женат</option>
+                <option *ngIf="!male">Замужем</option>
                 <option>Нет</option>
+                <option>В разводе</option>
             </select>
         </div>
         <div class="col-md-6 form-group">
             <label for="gender">Пол</label>
             <div class="form-group">
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="exampleRadios" id="male" checked>
+                    <input 
+                        (change)="male=true"
+                        id="male"
+                        class="form-check-input" 
+                        type="radio"
+                        name="exampleRadios"
+                        checked
+                    >
                     <label class="form-check-label" for="male">
                         муж.
                     </label>
                 </div>
                 <div class="form-check form-check-inline">
-                     <input class="form-check-input" type="radio" name="exampleRadios" id="female">
+                    <input
+                        (change)="male=false"
+                        class="form-check-input"
+                        type="radio"
+                        name="exampleRadios"
+                    >
                     <label class="form-check-label" for="female">
                         жен.
                     </label>
