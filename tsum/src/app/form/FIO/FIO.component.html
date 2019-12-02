@@ -1,5 +1,12 @@
-<div class="form-group">
+<div class="form-group" [formGroup]="fioGroup">
     <label for="fio">ФИО</label>
-    <input type="text" class="form-control" id="fio" aria-describedby="fioHelp" placeholder="Введите ФИО">
+    <input 
+        type="text" 
+        id="fio"
+        class="form-control"  
+        aria-describedby="fioHelp"
+        placeholder="Введите ФИО"
+        formControlName="FIO"
+    >
     <!--<small id="fioHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
 </div>
