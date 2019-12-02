@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import { FormGroup, FormControl, Validators } from '@angular/forms'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-form',
@@ -14,6 +15,8 @@ export class FormComponent implements OnInit {
   areYouKidding = false
   counterTry = 0
   disabled=false
+
+  constructor(private router: Router) {}
 
   ngOnInit() {
     this.form = new FormGroup({
@@ -59,7 +62,9 @@ export class FormComponent implements OnInit {
 
   submit() {
 
-    if (this.form.invalid) {
+    if (!this.form.invalid) {
+      this.router.navigate(['/resume'])      
+    } else {
       this.disabled = true
       setTimeout(() => this.disabled = false, 3000)
       if (this.counterTry > 2) {
@@ -67,8 +72,6 @@ export class FormComponent implements OnInit {
         this.counterTry = 0
       }
       this.counterTry++
-    } else {
-
     }
     
   }
