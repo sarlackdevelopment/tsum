@@ -21,7 +21,6 @@
 <form class="container" [formGroup]="form">
     <fieldset [disabled]="disabled">
         <h1 class="text-center">Форма резюме</h1>
-
         <div class="form-group">
             <label for="fio">ФИО</label>
             <input 
@@ -33,6 +32,10 @@
                 formControlName="FIO"
                 (change)="changeFIO($event)"
             >
+            <div *ngIf="form.get('FIO').touched && form.get('FIO').invalid" style="display: inline" class="invalid-feedback">
+                <span *ngIf="form.get('FIO').errors.pattern">Возможен ввод только кириллических символов</span>
+                <span *ngIf="form.get('FIO').errors.required">Поле ФИО не может быть пустым</span>
+            </div>
         </div>
         <div class="form-row">
             <div 
@@ -43,8 +46,8 @@
                 <label for="birthDate">Семейное положение</label>
                 <select class="form-control">
                     <option selected>Выбор...</option>
-                    <option *ngIf="male">Женат</option>
-                    <option *ngIf="!male">Замужем</option>
+                    <option *ngIf="Male">Женат</option>
+                    <option *ngIf="!Male">Замужем</option>
                     <option>Нет</option>
                     <option>В разводе</option>
                 </select>
@@ -90,6 +93,9 @@
                     placeholder="Введите дату рождения"
                     formControlName="birthDate"
                 >
+                <div *ngIf="form.get('birthDate').touched && form.get('birthDate').invalid" style="display: inline" class="invalid-feedback">
+                    <span *ngIf="form.get('birthDate').errors.required">Дата рождения не может быть пустой</span>
+                </div>
             </div>
             <div class="col-md-6 form-group">
                 <label for="countOfChildren">Количество детей</label>
@@ -97,6 +103,9 @@
                     <button type="button" class="btn btn-primary btn-sm mr-1" (click)="childs('decrease')">-</button>
                     <input type="text" class="form-control" id="countOfChildren" aria-describedby="countOfChildrenHelp" placeholder="количество" [value]="CountOfChilds">
                     <button type="button" class="btn btn-primary btn-sm ml-1" (click)="childs('increase')">+</button>
+                </div>
+                <div style="display: inline" class="invalid-feedback">
+                    <span *ngIf="CountOfChilds > 14">Вы издеваетесь?</span>
                 </div>
             </div>
         </div>
@@ -111,6 +120,10 @@
                 formControlName="email"
                 (change)="changeEmail($event)"
             >
+            <div *ngIf="form.get('email').touched && form.get('email').invalid" style="display: inline" class="invalid-feedback">
+                <span *ngIf="form.get('email').errors.email">Неизвестный формат Email адреса!</span>
+                <span *ngIf="form.get('email').errors.required">Поле email не может быть пустым</span>
+            </div>
         </div>
         <div class="form-group">
             <label for="comment">Введите комментарий</label>

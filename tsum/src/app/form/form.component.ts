@@ -4,15 +4,16 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-form',
-  templateUrl: './form.component.html'
+  templateUrl: './form.component.html',
+  styleUrls: ['./form.component.scss']
 })
 export class FormComponent implements OnInit {
 
   // data variables
   FIO           = ""
-  Family        = ""
+  Family        = "Выбор..."
   Male          = true
-  birthDate     = null
+  BirthDate     = null
   CountOfChilds = 0
   Email         = ""
   Comment       = ""
@@ -20,7 +21,6 @@ export class FormComponent implements OnInit {
   // service variables
   form: FormGroup
   toggleFamily  = false
-  //areYouKidding = false
   counterTry    = 0
   disabled      = false
 
@@ -44,13 +44,18 @@ export class FormComponent implements OnInit {
 
   changeBirthDate(event?: any) {
     
-    this.birthDate = event.target.value
+    this.BirthDate = event.target.value
 
     let now      = new Date()
     let userDate = event.target.value.split('-')[0]
     let thatYear = now.getFullYear()
 
-    this.toggleFamily = thatYear - userDate >= 18
+    if (thatYear - userDate >= 18) {
+      this.toggleFamily = true
+    } else {
+      this.toggleFamily = false
+      this.Family       = "Выбор..."
+    } 
 
   }
 
@@ -62,9 +67,6 @@ export class FormComponent implements OnInit {
         }
         break
       case 'increase':
-        if (this.CountOfChilds > 14) {
-          //this.areYouKidding = true
-        }
         this.CountOfChilds++
         break
     }
@@ -94,7 +96,7 @@ export class FormComponent implements OnInit {
         FIO: this.FIO, 
         Family: this.Family,
         Male: this.Male,
-        BirthDate: this.birthDate,
+        BirthDate: this.BirthDate,
         CountOfChilds: this.CountOfChilds,
         Email: this.Email,
         Comment: this.Comment
@@ -103,7 +105,7 @@ export class FormComponent implements OnInit {
       this.router.navigate(['/resume'], { queryParams: data })   
     } else {
       this.disabled = true
-      setTimeout(() => this.disabled = false, 3000)
+      setTimeout(() => this.disabled = false, 10000)
       if (this.counterTry > 2) {
         this.form.reset()
         this.counterTry = 0
