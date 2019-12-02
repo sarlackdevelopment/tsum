@@ -29,7 +29,7 @@
         >
     </div>
     <div class="form-row">
-        <div class="col-md-6 form-group">
+        <div *ngIf="toggleFamily" class="col-md-6 form-group">
             <label for="birthDate">Семейное положение</label>
             <select class="form-control">
                 <option>Женат</option>
@@ -57,9 +57,16 @@
         </div>
     </div>
     <div class="form-row">
-        <div class="col-md-6 form-group">
+        <div class="col-md-6 form-group" (change)="changeBirthDate($event)">
             <label for="birthDate">Дата рождения</label>
-            <input type="date" class="form-control" id="birthDate" aria-describedby="birthDateHelp" placeholder="Введите дату рождения">
+            <input 
+                type="date"
+                class="form-control"
+                id="birthDate"
+                aria-describedby="birthDateHelp"
+                placeholder="Введите дату рождения"
+                formControlName="birthDate"
+            >
         </div>
         <div class="col-md-6 form-group">
             <label for="countOfChildren">Количество детей</label>
