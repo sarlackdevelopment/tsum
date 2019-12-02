@@ -1,3 +1,45 @@
-<h3>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Accusantium, officiis.</h3>
+<section class="container jumbotron mt-5">
+    <h3 class="text-center">Данные из резюме</h3>
+    <hr>
 
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestiae, sed ipsa magnam sequi, velit accusamus corrupti at ullam dicta ducimus vero doloribus, temporibus a fuga iure. Facilis dolore asperiores earum.</p>
+    <!--<div *ngFor="let key of params" class="d-flex bg-light justify-content-between border my-2 shadow rounded">
+        <strong class="ml-5 my-2">ФИО: </strong>
+        <span class="mr-5 my-2">{{ key }}</span>
+    </div>-->
+
+    <div class="d-flex bg-light justify-content-between border my-2 shadow rounded">
+        <strong class="ml-5 my-2">ФИО: </strong>
+        <span class="mr-5 my-2">{{ FIO }}</span>
+    </div>
+
+    <div class="d-flex bg-light justify-content-between border my-2 shadow rounded">
+        <strong class="ml-5 my-2">Семейное положение: </strong>
+        <span class="mr-5 my-2">{{ Family }}</span>
+    </div>
+
+    <div class="d-flex bg-light justify-content-between border my-2 shadow rounded">
+        <strong class="ml-5 my-2">Пол: </strong>
+        <span class="mr-5 my-2">{{ Male ? 'Мужчина': 'Женщина' }}</span>
+    </div>
+
+    <div class="d-flex bg-light justify-content-between border my-2 shadow rounded">
+        <strong class="ml-5 my-2">Дата рождения: </strong>
+        <span class="mr-5 my-2">{{ BirthDate }}</span>
+    </div>
+
+    <div class="d-flex bg-light justify-content-between border my-2 shadow rounded">
+        <strong class="ml-5 my-2">Количество детей: </strong>
+        <span class="mr-5 my-2">{{ CountOfChilds }}</span>
+    </div>
+
+    <div class="d-flex bg-light justify-content-between border my-2 shadow rounded">
+        <strong class="ml-5 my-2">Email: </strong>
+        <span class="mr-5 my-2">{{ Email }}</span>
+    </div>
+
+    <div class="d-flex bg-light justify-content-between border my-2 shadow rounded">
+        <strong class="ml-5 my-2">Комментарий: </strong>
+        <span class="mr-5 my-2">{{ Comment }}</span>
+    </div>
+
+</section>

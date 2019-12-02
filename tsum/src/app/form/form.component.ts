@@ -8,13 +8,21 @@ import { Router } from '@angular/router';
 })
 export class FormComponent implements OnInit {
 
+  // data variables
+  FIO           = ""
+  Family        = ""
+  Male          = true
+  birthDate     = null
+  CountOfChilds = 0
+  Email         = ""
+  Comment       = ""
+
+  // service variables
   form: FormGroup
-  toggleFamily = false
-  male = true
-  countOfChilds = 0
-  areYouKidding = false
-  counterTry = 0
-  disabled=false
+  toggleFamily  = false
+  //areYouKidding = false
+  counterTry    = 0
+  disabled      = false
 
   constructor(private router: Router) {}
 
@@ -36,6 +44,8 @@ export class FormComponent implements OnInit {
 
   changeBirthDate(event?: any) {
     
+    this.birthDate = event.target.value
+
     let now      = new Date()
     let userDate = event.target.value.split('-')[0]
     let thatYear = now.getFullYear()
@@ -47,23 +57,50 @@ export class FormComponent implements OnInit {
   childs(operation) {
     switch (operation) {
       case 'decrease':
-        if (this.countOfChilds != 0) {
-          this.countOfChilds--
+        if (this.CountOfChilds != 0) {
+          this.CountOfChilds--
         }
         break
       case 'increase':
-        if (this.countOfChilds > 14) {
-          this.areYouKidding = true
+        if (this.CountOfChilds > 14) {
+          //this.areYouKidding = true
         }
-        this.countOfChilds++
+        this.CountOfChilds++
         break
     }
+  }
+
+  changeFIO(event?: any) {
+    this.FIO = event.target.value
+  }
+
+  changeFamily(event?: any) {
+    this.Family = event.target.value
+  }
+
+  changeEmail(event?: any) {
+    this.Email = event.target.value
+  }
+
+  changeComment(event?: any) {
+    this.Comment = event.target.value
   }
 
   submit() {
 
     if (!this.form.invalid) {
-      this.router.navigate(['/resume'])      
+      
+      let data = { 
+        FIO: this.FIO, 
+        Family: this.Family,
+        Male: this.Male,
+        BirthDate: this.birthDate,
+        CountOfChilds: this.CountOfChilds,
+        Email: this.Email,
+        Comment: this.Comment
+      }
+      
+      this.router.navigate(['/resume'], { queryParams: data })   
     } else {
       this.disabled = true
       setTimeout(() => this.disabled = false, 3000)

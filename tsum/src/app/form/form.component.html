@@ -31,10 +31,15 @@
                 aria-describedby="fioHelp"
                 placeholder="Введите ФИО"
                 formControlName="FIO"
+                (change)="changeFIO($event)"
             >
         </div>
         <div class="form-row">
-            <div *ngIf="toggleFamily" class="col-md-6 form-group">
+            <div 
+                *ngIf="toggleFamily" 
+                class="col-md-6 form-group" 
+                (change)="changeFamily($event)"
+            >
                 <label for="birthDate">Семейное положение</label>
                 <select class="form-control">
                     <option selected>Выбор...</option>
@@ -49,7 +54,7 @@
                 <div class="form-group">
                     <div class="form-check form-check-inline">
                         <input 
-                            (change)="male=true"
+                            (change)="Male=true"
                             id="male"
                             class="form-check-input" 
                             type="radio"
@@ -62,7 +67,7 @@
                     </div>
                     <div class="form-check form-check-inline">
                         <input
-                            (change)="male=false"
+                            (change)="Male=false"
                             class="form-check-input"
                             type="radio"
                             name="exampleRadios"
@@ -90,18 +95,26 @@
                 <label for="countOfChildren">Количество детей</label>
                 <div class="d-flex">
                     <button type="button" class="btn btn-primary btn-sm mr-1" (click)="childs('decrease')">-</button>
-                    <input type="text" class="form-control" id="countOfChildren" aria-describedby="countOfChildrenHelp" placeholder="количество" [value]="countOfChilds">
+                    <input type="text" class="form-control" id="countOfChildren" aria-describedby="countOfChildrenHelp" placeholder="количество" [value]="CountOfChilds">
                     <button type="button" class="btn btn-primary btn-sm ml-1" (click)="childs('increase')">+</button>
                 </div>
             </div>
         </div>
         <div class="form-group">
             <label for="emailAddress">Email</label>
-            <input type="email" class="form-control" id="emailAddress" aria-describedby="emailHelp" placeholder="Введите email" formControlName="email">
+            <input 
+                type="email" 
+                id="emailAddress"
+                class="form-control" 
+                aria-describedby="emailHelp"
+                placeholder="Введите email"
+                formControlName="email"
+                (change)="changeEmail($event)"
+            >
         </div>
         <div class="form-group">
             <label for="comment">Введите комментарий</label>
-            <textarea class="form-control" id="comment" rows="3"></textarea>
+            <textarea class="form-control" id="comment" rows="3" (change)="changeComment($event)"></textarea>
         </div>
 
         <button class="btn btn-primary btn-block" type="submit" (click)="submit()">Отправить</button>
